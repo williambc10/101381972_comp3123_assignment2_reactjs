@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import './Employees.css';
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [search, setSearch] = useState('');
+  const [filteredEmployees, setFilteredEmployees] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,13 +18,37 @@ const Employees = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEmployees(response.data);
+        setFilteredEmployees(response.data);
       } catch (error) {
-        alert('Error fetching employees: ' + error.response?.data?.message || error.message);
+        alert('Error fetching employees: ' + (error.response?.data?.message || error.message));
       }
     };
 
     fetchEmployees();
   }, [refresh]);
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearch(value);
+
+    const filtered = employees.filter((emp) =>
+      emp.first_name.toLowerCase().includes(value) ||
+      emp.last_name.toLowerCase().includes(value) ||
+      emp.position.toLowerCase().includes(value) ||
+      emp.department.toLowerCase().includes(value)
+    );
+
+    setFilteredEmployees(filtered);
+
+    if (!value) {
+      setFilteredEmployees(employees);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  };
 
   const handleDeleteEmployee = async (empid) => {
     if (!window.confirm('Are you sure you want to delete this employee?')) return;
@@ -52,29 +79,51 @@ const Employees = () => {
   };
 
   return (
-    <div>
-      <h1>Employee Management</h1>
-      <h2 style={{ textAlign: 'center' }}>Employee List</h2>
-      <button onClick={() => navigate('/add-employee')}>Add Employee</button>
-      <table border="1" style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+    <div className="employees-container">
+      <header>
+        <h1>Employee Management App</h1>
+        <button onClick={handleLogout} className="log-out-button">
+          Log Out
+        </button>
+      </header>
+      <h2>Employees List</h2>
+      <button onClick={() => setRefresh(!refresh)} className="add-button">
+          Add Employee
+      </button>
+      <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search employees..."
+            value={search}
+            onChange={handleSearch}
+            className="search-input"
+          />
+      </div>
+      <table>
         <thead>
           <tr>
             <th>Employee First Name</th>
             <th>Employee Last Name</th>
-            <th>Employee ID</th>
-            <th>Admin Actions</th>
+            <th>Employee Email ID</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {filteredEmployees.map((employee) => (
             <tr key={employee._id}>
               <td>{employee.first_name}</td>
               <td>{employee.last_name}</td>
-              <td>{employee._id}</td>
+              <td>{employee.email}</td>
               <td>
-                <button onClick={() => navigate(`/update-employee/${employee._id}`)}>Update</button>
-                <button onClick={() => handleDeleteEmployee(employee._id)}>Delete</button>
-                <button onClick={() => handleViewEmployee(employee._id)}>View</button>
+                <button onClick={() => navigate(`/update-employee/${employee._id}`)} className="action-button">
+                  Update
+                </button>
+                <button onClick={() => handleDeleteEmployee(employee._id)} className="action-button delete">
+                  Delete
+                </button>
+                <button onClick={() => handleViewEmployee(employee._id)} className="action-button view">
+                  View
+                </button>
               </td>
             </tr>
           ))}

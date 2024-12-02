@@ -1,0 +1,61 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.signup-form {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signup-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.signup-form input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.register-button, .cancel-button {
+  width: 45%;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-button {
+  background-color: rgb(11, 238, 11);
+  color: white;
+}
+
+.cancel-button {
+  background-color: red;
+  color: white;
+}
+
+.register-button:hover, .cancel-button:hover {
+  opacity: 0.9;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import './AddEmployee.css'
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -34,28 +35,22 @@ const AddEmployee = () => {
   };
 
   return (
-    <div>
-      <h1>Add Employee</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="add-employee-container">
+      <form onSubmit={handleSubmit} className="add-employee-form">
+        <h1>Add Employee</h1>
         <label>First Name:</label>
         <input type="text" name="first_name" value={employeeData.first_name} onChange={handleChange} required />
-        <br />
         <label>Last Name:</label>
         <input type="text" name="last_name" value={employeeData.last_name} onChange={handleChange} required />
-        <br />
         <label>Email:</label>
         <input type="email" name="email" value={employeeData.email} onChange={handleChange} required />
-        <br />
         <label>Position:</label>
         <input type="text" name="position" value={employeeData.position} onChange={handleChange} required />
-        <br />
         <label>Salary:</label>
         <input type="number" name="salary" value={employeeData.salary} onChange={handleChange} required />
-        <br />
         <label>Department:</label>
         <input type="text" name="department" value={employeeData.department} onChange={handleChange} required />
-        <br />
-        <button type="submit">Add Employee</button>
+        <button type="submit" className="add-employee-button">Add Employee</button>
       </form>
     </div>
   );

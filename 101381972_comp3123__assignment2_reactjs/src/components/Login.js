@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -37,24 +38,33 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <form onSubmit={handleLogin} className="login-form">
+        <h1>Login</h1>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <div className="button-group">
+          <button type="button" className="signup-button" onClick={() => navigate('/signup')}>
+            Sign Up
+          </button>
+          <button type="submit" className="login-button">
+            Log In
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

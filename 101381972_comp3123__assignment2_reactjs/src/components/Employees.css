@@ -1,0 +1,81 @@
+.employees-container {
+  font-family: Arial, sans-serif;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+  
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+  
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+h2 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.add-button, .log-out-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: -1200px;
+}
+
+.log-out-button {
+  background-color: red;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #f4f4f4;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #eeebeb;
+}
+
+.action-button {
+  background-color: rgb(9, 107, 244);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.action-button.delete {
+  background-color: red;
+}
+
+.action-button.view {
+  background-color: rgb(9, 184, 47);
+}

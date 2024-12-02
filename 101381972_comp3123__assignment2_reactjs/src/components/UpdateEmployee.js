@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { useNavigate, useParams } from 'react-router-dom';
+import './UpdateEmployee.css'
 
 const UpdateEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -12,7 +13,7 @@ const UpdateEmployee = () => {
     department: '',
   });
 
-  const { empid } = useParams(); // Get the employee ID from the route
+  const { empid } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,35 +45,29 @@ const UpdateEmployee = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert('Employee updated successfully!');
-      navigate('/employees'); // Redirect to the employee list
+      navigate('/employees');
     } catch (error) {
       alert('Error updating employee: ' + error.response?.data?.message || error.message);
     }
   };
 
   return (
-    <div>
-      <h1>Update Employee</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="update-employee-container">
+      <form onSubmit={handleSubmit} className="update-employee-form">
+        <h1>Update Employee</h1>
         <label>First Name:</label>
         <input type="text" name="first_name" value={employeeData.first_name} onChange={handleChange} required />
-        <br />
         <label>Last Name:</label>
         <input type="text" name="last_name" value={employeeData.last_name} onChange={handleChange} required />
-        <br />
         <label>Email:</label>
         <input type="email" name="email" value={employeeData.email} onChange={handleChange} required />
-        <br />
         <label>Position:</label>
         <input type="text" name="position" value={employeeData.position} onChange={handleChange} required />
-        <br />
         <label>Salary:</label>
         <input type="number" name="salary" value={employeeData.salary} onChange={handleChange} required />
-        <br />
         <label>Department:</label>
         <input type="text" name="department" value={employeeData.department} onChange={handleChange} required />
-        <br />
-        <button type="submit">Update Employee</button>
+        <button type="submit" className="update-button">Update Employee</button>
       </form>
     </div>
   );
