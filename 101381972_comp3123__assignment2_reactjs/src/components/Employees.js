@@ -87,7 +87,7 @@ const Employees = () => {
         </button>
       </header>
       <h2>Employees List</h2>
-      <button onClick={() => setRefresh(!refresh)} className="add-button">
+      <button onClick={() => {setRefresh(!refresh); navigate('/add-employee');}} className="add-button">
           Add Employee
       </button>
       <div className="search-container">

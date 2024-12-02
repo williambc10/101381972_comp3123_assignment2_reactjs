@@ -47,7 +47,7 @@
     border-radius: 5px;
     cursor: pointer;
     color: white;
-    background-color: rgb(11, 238, 11); /* Green */
+    background-color: rgb(11, 238, 11);
 }
 
 .add-employee-form .add-employee-button:hover {
